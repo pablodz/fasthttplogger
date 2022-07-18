@@ -1,6 +1,11 @@
 # FastHttpLogger
 HTTP request logger middleware for FastHttp
 
+#### Install
+
+```
+go get -v github.com/pablodz/fasthttplogger/fasthttplogger
+```
 
 ##### Tiny / TinyColored
 ```
