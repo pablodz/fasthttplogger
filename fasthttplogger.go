@@ -67,6 +67,7 @@ func Tiny(req fasthttp.RequestHandler) fasthttp.RequestHandler {
 		)
 	})
 }
+
 // TinyColored is same as Tiny but colored
 func TinyColored(req fasthttp.RequestHandler) fasthttp.RequestHandler {
 	return fasthttp.RequestHandler(func(ctx *fasthttp.RequestCtx) {
@@ -100,6 +101,7 @@ func Short(req fasthttp.RequestHandler) fasthttp.RequestHandler {
 		)
 	})
 }
+
 // ShortColored is same as Short but colored
 func ShortColored(req fasthttp.RequestHandler) fasthttp.RequestHandler {
 	return fasthttp.RequestHandler(func(ctx *fasthttp.RequestCtx) {
@@ -125,32 +127,33 @@ func Combined(req fasthttp.RequestHandler) fasthttp.RequestHandler {
 		begin := time.Now()
 		req(ctx)
 		end := time.Now()
-		output.Printf("[%v] %v | %s | %s %s - %v - %v | %s",
+		output.Printf("[%v] %v | %s | %v | %s %s - %v | %s",
 			end.Format("2006/01/02 - 15:04:05"),
 			ctx.RemoteAddr(),
 			getHttp(ctx),
+			end.Sub(begin),
 			ctx.Method(),
 			ctx.RequestURI(),
 			ctx.Response.Header.StatusCode(),
-			end.Sub(begin),
 			ctx.UserAgent(),
 		)
 	})
 }
+
 // CombinedColored is same as Combined but colored
 func CombinedColored(req fasthttp.RequestHandler) fasthttp.RequestHandler {
 	return fasthttp.RequestHandler(func(ctx *fasthttp.RequestCtx) {
 		begin := time.Now()
 		req(ctx)
 		end := time.Now()
-		output.Printf("[%v] %v | %s | %s %s - %v - %v | %s",
+		output.Printf("[%v] %v | %s | %v | %s %s - %v | %s",
 			end.Format("2006/01/02 - 15:04:05"),
 			ctx.RemoteAddr(),
 			getHttp(ctx),
+			end.Sub(begin),
 			colorMethod(ctx.Method(), ctx.Response.Header.StatusCode()),
 			ctx.RequestURI(),
 			colorStatus(ctx.Response.Header.StatusCode()),
-			end.Sub(begin),
 			ctx.UserAgent(),
 		)
 	})
